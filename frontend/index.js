@@ -1,5 +1,10 @@
+var form = document.getElementById('schedule-form')
+let time;
+
 function addNewMeeting(event){
     event.preventDefault();
+    console.log('testing')
+    form.style.visibility = 'hidden'
 
     const name = document.getElementById('name').value;
     const mail = document.getElementById('mail').value;
@@ -9,7 +14,11 @@ function addNewMeeting(event){
         mail
     }
 
+    
     showMeetings(meetingDetials)
+
+    document.getElementById('name').value = '';
+    document.getElementById('mail').value = '';
 }
 
 function showMeetings(meeting) {
@@ -20,5 +29,13 @@ function showMeetings(meeting) {
     let link = document.createElement('p');
 
     person.textContent = `Hi ${meeting.name}`
-    link.textContent = `Please join the meeting`
+    link.textContent = `Please join the meeting at ${time}`
+
+    card.appendChild(link);
+    div.append(card)
+}
+
+function testing(t){
+    time = t
+    form.style.visibility = 'visible'
 }
