@@ -12,19 +12,19 @@
     </header>
     <div class="main-div">
       <div class="schedules-div">
-        <div class="schedule" onclick="testing('2:00')">
+        <div id="schedule1" class="schedule" onclick="testing('2:00')">
           <p>2:00 PM</p>
           <p>4 Seats Available</p>
         </div>
-        <div class="schedule" onclick="testing('2:30')">
+        <div id="schedule4" class="schedule" onclick="testing('2:30')">
           <p>2:30 PM</p>
           <p>4 Seats Available</p>
         </div>
-        <div class="schedule" onclick="testing('3:00')">
+        <div id="schedule3" class="schedule" onclick="testing('3:00')">
           <p>3:00 PM</p>
           <p>4 Seats Available</p>
         </div>
-        <div class="schedule" onclick="testing('3:30')">
+        <div id="schedule4" class="schedule" onclick="testing('3:30')">
           <p>3:30 PM</p>
           <p>4 Seats Available</p>
         </div>
@@ -41,10 +41,12 @@
         <button class="schedule-btn" type="submit">Schedule</button>
       </form>
     </div>
-    <div id="scheduledMeetings">
-      <h1>Scheduled Meetings</h1>
+    <div>
+      <h1 class="main-heading">Scheduled Meetings</h1>
+      <div id="scheduledMeetings"></div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
