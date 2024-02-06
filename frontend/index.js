@@ -7,10 +7,10 @@ let availableSlots2 = 4;
 let availableSlots3 = 4;
 let availableSlots4 = 4;
 
-let slot1 = document.getElementById('slots1')
-let slot2 = document.getElementById('slots2')
-let slot3 = document.getElementById('slots3')
-let slot4 = document.getElementById('slots4')
+// let slot1 = document.getElementById('slots1')
+// let slot2 = document.getElementById('slots2')
+// let slot3 = document.getElementById('slots3')
+// let slot4 = document.getElementById('slots4')
 
 
 let schedule1 = document.getElementById('schedule1');
@@ -18,10 +18,10 @@ let schedule2 = document.getElementById('schedule2');
 let schedule3 = document.getElementById('schedule3');
 let schedule4 = document.getElementById('schedule4');
 
-slot1.innerText = availableSlots1
-slot2.innerText = availableSlots2
-slot3.innerText = availableSlots3
-slot4.innerText = availableSlots4
+// slot1.innerText = availableSlots1
+// slot2.innerText = availableSlots2
+// slot3.innerText = availableSlots3
+// slot4.innerText = availableSlots4
 
 
 function testing(t) {
@@ -41,42 +41,42 @@ function addNewMeeting(event) {
     mail,
     time
   };
-  if(time === '2:00'){
-    availableSlots1 = availableSlots1-1; 
-    slot1.innerText = availableSlots1
-  }
-  else if(time === '2:30'){
-    availableSlots2 = availableSlots2-1; 
-    slot2.innerText = availableSlots2
-  }
-  else if(time === '3:00'){
-    availableSlots3 = availableSlots3-1; 
-    slot3.innerText = availableSlots3
-  }
-  else if(time === '3:30'){
-    availableSlots4 = availableSlots4-1; 
-    slot4.innerText = availableSlots4
-  }
+  // if(time === '2:00'){
+  //   availableSlots1 = availableSlots1-1; 
+  //   slot1.innerText = availableSlots1
+  // }
+  // else if(time === '2:30'){
+  //   availableSlots2 = availableSlots2-1; 
+  //   slot2.innerText = availableSlots2
+  // }
+  // else if(time === '3:00'){
+  //   availableSlots3 = availableSlots3-1; 
+  //   slot3.innerText = availableSlots3
+  // }
+  // else if(time === '3:30'){
+  //   availableSlots4 = availableSlots4-1; 
+  //   slot4.innerText = availableSlots4
+  // }
 
-  if(availableSlots1<1){
-    schedule1.style.display = 'none';
-  }
+  // if(availableSlots1<1){
+  //   schedule1.style.display = 'none';
+  // }
 
-  if(availableSlots2<1){
-    schedule2.style.display = 'none';
-  }
+  // if(availableSlots2<1){
+  //   schedule2.style.display = 'none';
+  // }
 
-  if(availableSlots3<1){
-    schedule3.style.display = 'none';
-  }
+  // if(availableSlots3<1){
+  //   schedule3.style.display = 'none';
+  // }
 
-  if(availableSlots4<1){
-    schedule4.style.display = 'none';
-  }
+  // if(availableSlots4<1){
+  //   schedule4.style.display = 'none';
+  // }
 
-  axios.post('https://crudcrud.com/api/e0708c4e67d042c29742ee85e592509e/meeting', meetingDetials)
+  axios.post('http://localhost:3000/meeting/add-meeting', meetingDetials)
   .then((res) => {
-    showMeetings(res.data);
+    showMeetings(res.data.newMeetingDetials);
   })
   .catch((err) => {
     console.log(err)
@@ -89,6 +89,7 @@ function addNewMeeting(event) {
 }
 
 function showMeetings(meeting) {
+  console.log(meeting)
   let div = document.getElementById("scheduledMeetings");
 
   let card = document.createElement("div");
@@ -114,19 +115,19 @@ function showMeetings(meeting) {
 }
 
 function meetingHandler(meeting){
-  if(meeting.time === '2:00'){
-    availableSlots1 = availableSlots1 + 1;
-  }
-  else if(meeting.time === '2:30'){
-    availableSlots2 = availableSlots2 + 1;
-  }
-  else if(meeting.time === '3:00'){
-    availableSlots3 = availableSlots3 + 1;
-  }
-  else {
-    availableSlots4 = availableSlots4 + 1
-  }
-  axios.delete(`https://crudcrud.com/api/e0708c4e67d042c29742ee85e592509e/meeting/${meeting._id}`)
+  // if(meeting.time === '2:00'){
+  //   availableSlots1 = availableSlots1 + 1;
+  // }
+  // else if(meeting.time === '2:30'){
+  //   availableSlots2 = availableSlots2 + 1;
+  // }
+  // else if(meeting.time === '3:00'){
+  //   availableSlots3 = availableSlots3 + 1;
+  // }
+  // else {
+  //   availableSlots4 = availableSlots4 + 1
+  // }
+  axios.delete(`http://localhost:3000/meeting/delete-meeting/${meeting.id}`)
   .then(() => {
     console.log('Scheduled meeting was deleted')
   })
@@ -136,10 +137,10 @@ function meetingHandler(meeting){
 }
 
 function getAllMeetings() {
-    axios.get('https://crudcrud.com/api/e0708c4e67d042c29742ee85e592509e/meeting')
+    axios.get('http://localhost:3000/meeting/get-meeting')
     .then((res) => {
-        for(let i=0; i<res.data.length; i++){
-            showMeetings(res.data[i])
+        for(let i=0; i<res.data.allMeetingDetails.length; i++){
+            showMeetings(res.data.allMeetingDetails[i])
         }
     })
     .catch((err) => {
